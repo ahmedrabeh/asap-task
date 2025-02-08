@@ -18,7 +18,11 @@ export class LoginComponent {
 
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    if (localStorage.getItem('user')) {
+      this.router.navigate(['/home']); // Redirect if already logged in
+    }
+  }
 
   login() {
     this.authService.login(this.email, this.password).subscribe({
